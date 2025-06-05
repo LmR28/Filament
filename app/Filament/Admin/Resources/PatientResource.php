@@ -13,7 +13,7 @@ use App\Filament\Admin\Resources\PatientResource\RelationManagers\TreatmentsRela
 
 class PatientResource extends Resource
 {
-    protected static ?string $model = Patient::class;
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     public static function form(Form $form): Form
     {

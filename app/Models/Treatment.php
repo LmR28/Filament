@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Casts\MoneyCast;
 
 class Treatment extends Model
 {
@@ -14,6 +15,6 @@ class Treatment extends Model
         return $this->belongsTo(Patient::class);
     }
     protected $casts = [
-        'price' => MoneyCast::class,
+        'price' => \App\Casts\MoneyCast::class,
     ];
 }
