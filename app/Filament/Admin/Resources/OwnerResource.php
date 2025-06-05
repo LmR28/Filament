@@ -43,7 +43,15 @@ class OwnerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Correo electrónico')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('Teléfono'),
             ])
             ->filters([
                 //

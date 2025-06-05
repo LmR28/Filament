@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Filament\Admin\Resources;
 
 use App\Models\Patient;
@@ -13,6 +12,7 @@ use App\Filament\Admin\Resources\PatientResource\RelationManagers\TreatmentsRela
 
 class PatientResource extends Resource
 {
+    protected static ?string $model = Patient::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     public static function form(Form $form): Form
@@ -106,10 +106,10 @@ class PatientResource extends Resource
 
     public static function getPages(): array
     {
-        return [
-            'index' => \App\Filament\Admin\Resources\PatientResource\Pages\ListPatients::route('/'),
-            'create' => \App\Filament\Admin\Resources\PatientResource\Pages\CreatePatient::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\PatientResource\Pages\EditPatient::route('/{record}/edit'),
-        ];
+       return [
+        'index' => \App\Filament\Admin\Resources\PatientResource\Pages\ListPatients::route('/'),
+        'create' => \App\Filament\Admin\Resources\PatientResource\Pages\CreatePatient::route('/create'),
+        'edit' => \App\Filament\Admin\Resources\PatientResource\Pages\EditPatient::route('/{record}/edit'),
+    ];
     }
 }

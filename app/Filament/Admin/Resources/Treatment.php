@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\TreatmentResource\Pages;
@@ -20,16 +19,37 @@ class TreatmentResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+        ->schema([
+            Forms\Components\TextInput::make('name')
+                ->label('Nombre')
+                ->required()
+                ->maxLength(255)
+                ->unique(ignoreRecord: true, message: 'Este correo ya está registrado.'),             Forms\Components\Textarea::make('description')
+                ->label('Descripción')
+                ->maxLength(65535),
+            Forms\Components\Select::make('patient_id')
+                ->label('Paciente')
+                ->relationship('patient', 'name')
+                ->searchable()
+                ->preload()
+                ->required(),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Descripción')
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('patient.name')
+                    ->label('Paciente')
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -54,9 +74,9 @@ class TreatmentResource extends Resource
     public static function getPages(): array
     {
         return [
-        'index' => Pages\ListTreatments::route('/'),
-        'create' => Pages\CreateTreatment::route('/create'),
-        'edit' => Pages\EditTreatment::route('/{record}/edit'),
+            'index' => Pages\ListTreatments::route('/'),
+            'create' => Pages\CreateTreatment::route('/create'),
+            'edit' => Pages\EditTreatment::route('/{record}/edit'),
         ];
     }
 }
