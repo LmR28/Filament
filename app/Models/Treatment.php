@@ -13,4 +13,7 @@ class Treatment extends Model
     {
         return $this->belongsTo(Patient::class);
     }
+    protected $casts = [
+        'price' => MoneyCast::class,
+    ];
 }
